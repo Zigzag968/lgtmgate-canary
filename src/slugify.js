@@ -6,19 +6,21 @@
  * Rules: lowercase, ASCII letters and digits only, words joined by a single
  * hyphen, no leading/trailing hyphen.
  *
- * KNOWN BUG (tracked as the canary's issue #1 — do not fix here without a PR):
- * accented letters are dropped instead of being transliterated, and runs of
- * whitespace produce doubled hyphens:
- *   slugify("Héllo  Wörld!") -> "h-llo--w-rld"   (expected "hello-world")
+ * Accented letters are transliterated via Unicode NFD decomposition (combining
+ * marks are stripped), and any run of non-alphanumerics (including whitespace)
+ * collapses to one hyphen:
+ *   slugify("Héllo  Wörld!") -> "hello-world"
+ * Letters with no NFD decomposition (ß, ø, æ, ł) are dropped.
  */
 function slugify(input) {
   if (typeof input !== 'string') {
     throw new TypeError('slugify: input must be a string');
   }
-  const words = input.toLowerCase().split(' ');
-  const parts = words.map((word) => word.replace(/[^a-z0-9]+/g, '-'));
-  return parts
-    .join('-')
+  return input
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+/, '')
     .replace(/-+$/, '');
 }
