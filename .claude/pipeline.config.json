@@ -1,0 +1,31 @@
+{
+  "ghProject": {},
+  "baseBranch": "main",
+  "branchPrefix": "feat/",
+  "worktreeRoot": "../worktrees/lgtmgate-canary",
+  "repo": "Zigzag968/lgtmgate-canary",
+  "conventionsRule": ".claude/rules/pr-acceptance.md",
+  "commands": {
+    "build": "npm run build",
+    "test": "npm test",
+    "format": "npm run format"
+  },
+  "ciChecks": [
+    "test"
+  ],
+  "regressionGuard": {
+    "testGlob": "test/*.test.js",
+    "testFnPattern": "test(",
+    "baselineCmd": "node --test"
+  },
+  "provision": {
+    "extraLinks": []
+  },
+  "preflight": {
+    "canonicalStringBan": [],
+    "envSymlink": "forbidden"
+  },
+  "planAudit": false,
+  "planFreshness": "advisory",
+  "stack": "Node 22 / stdlib only (node:test)"
+}

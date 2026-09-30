@@ -1,0 +1,4 @@
+node_modules
+.pipeline/
+.claude/settings.local.json
+.claude/pipeline.config.local.json

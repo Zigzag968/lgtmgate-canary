@@ -1,0 +1,17 @@
+{
+  "name": "lgtmgate-canary",
+  "version": "0.1.0",
+  "description": "Canary consumer for the lgtmgate Claude Code plugin (beta channel)",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/slugify.js",
+  "scripts": {
+    "build": "node --check src/slugify.js && node --check src/render.js",
+    "test": "node --test",
+    "format": "echo \"no formatter configured (stdlib-only project)\""
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}

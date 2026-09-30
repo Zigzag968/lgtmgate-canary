@@ -1,0 +1,12 @@
+{
+  "extraKnownMarketplaces": {
+    "zigzag-plugins-beta": {
+      "source": {
+        "source": "github",
+        "repo": "Zigzag968/claude-code-lgtmgate",
+        "path": ".claude-plugin/marketplace-beta.json"
+      }
+    }
+  },
+  "enabledPlugins": {}
+}
