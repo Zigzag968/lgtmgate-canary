@@ -78,3 +78,45 @@ test('throws TypeError for a date that is set but not a real ISO calendar day', 
 test('lets Intl reject an invalid locale with a RangeError', () => {
   assert.throws(() => render({ title: 'Release', date: '2026-09-30' }, { locale: 'not a locale' }), RangeError);
 });
+
+test('rejects a whitespace-only title', () => {
+  for (const title of ['   ', ' \t\n ', String.fromCodePoint(0xa0)]) {
+    assert.throws(() => render({ title }), {
+      name: 'TypeError',
+      message: 'render: card.title must be a non-empty string',
+    });
+  }
+});
+
+test('drops whitespace-only tags', () => {
+  assert.equal(render({ title: 'Hi', tags: ['a', '   ', 'b'] }), 'Hi\n==\n#a #b');
+});
+
+test('omits the tags line when every tag is whitespace-only', () => {
+  assert.equal(render({ title: 'Hi', tags: ['   ', '\t'] }), 'Hi\n==');
+});
+
+test('still drops falsy tags and keeps truthy non-string tags', () => {
+  assert.equal(render({ title: 'Hi', tags: [0, ' a ', 5] }), 'Hi\n==\n#a #5');
+});
+
+test('keeps the date line when every tag is whitespace-only', () => {
+  assert.equal(
+    render({ title: 'Hi', date: '2026-09-30', tags: ['   ', '\t'] }, { locale: 'en-US' }),
+    'Hi\n==\nSeptember 30, 2026',
+  );
+});
+
+test('drops whitespace-only tags between the date line and the remaining tags', () => {
+  assert.equal(
+    render({ title: 'Hi', date: '2026-09-30', tags: ['a', '   ', 'b'] }, { locale: 'fr-FR' }),
+    'Hi\n==\n30 septembre 2026\n#a #b',
+  );
+});
+
+test('rejects a whitespace-only title even when a date is set', () => {
+  assert.throws(() => render({ title: '   ', date: '2026-09-30' }, { locale: 'en-US' }), {
+    name: 'TypeError',
+    message: 'render: card.title must be a non-empty string',
+  });
+});

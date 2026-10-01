@@ -33,7 +33,7 @@ function parseCardDate(value) {
  *   // "Release\n=======\n30 septembre 2026"
  */
 function render(card, options) {
-  if (!card || typeof card.title !== 'string' || card.title.length === 0) {
+  if (!card || typeof card.title !== 'string' || card.title.trim().length === 0) {
     throw new TypeError('render: card.title must be a non-empty string');
   }
   const { locale = 'en-US' } = options ?? {};
@@ -44,9 +44,11 @@ function render(card, options) {
     const date = parseCardDate(card.date);
     lines.push(new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: 'UTC' }).format(date));
   }
-  const tags = Array.isArray(card.tags) ? card.tags.filter(Boolean) : [];
+  const tags = Array.isArray(card.tags)
+    ? card.tags.filter(Boolean).map((tag) => String(tag).trim()).filter(Boolean)
+    : [];
   if (tags.length > 0) {
-    lines.push(tags.map((tag) => `#${String(tag).trim()}`).join(' '));
+    lines.push(tags.map((tag) => `#${tag}`).join(' '));
   }
   return lines.join('\n');
 }
