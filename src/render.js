@@ -1,19 +1,49 @@
 'use strict';
 
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
 /**
- * Render a tiny "card" as plain text: a title line, an underline, and an
- * optional list of tags. Pure function, no I/O.
+ * Parse a strict ISO `YYYY-MM-DD` calendar day into a Date at UTC midnight.
+ * Rejects non-strings, malformed strings and days that do not exist (V8 would
+ * silently roll `2026-02-30` into March 2, so the result is round-tripped).
+ */
+function parseCardDate(value) {
+  const parsed = typeof value === 'string' && ISO_DATE.test(value) ? new Date(`${value}T00:00:00Z`) : null;
+  if (!parsed || Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== value) {
+    throw new TypeError('render: card.date must be an ISO YYYY-MM-DD date');
+  }
+  return parsed;
+}
+
+/**
+ * Render a tiny "card" as plain text: a title line, an underline, an optional
+ * locale-formatted date line and an optional list of tags. Pure function, no
+ * I/O.
  *
  *   render({ title: 'Hello', tags: ['a', 'b'] })
  *   // "Hello\n=====\n#a #b"
+ *
+ * When `card.date` is set (ISO `YYYY-MM-DD`), a long date line is appended
+ * under the underline, formatted with `Intl.DateTimeFormat` in UTC so the day
+ * never shifts with the host time zone. `options.locale` defaults to `en-US`.
+ * A date that is set but not a real calendar day throws a `TypeError`; an
+ * invalid locale lets Intl's own `RangeError` propagate.
+ *
+ *   render({ title: 'Release', date: '2026-09-30' }, { locale: 'fr-FR' })
+ *   // "Release\n=======\n30 septembre 2026"
  */
-function render(card) {
+function render(card, options) {
   if (!card || typeof card.title !== 'string' || card.title.length === 0) {
     throw new TypeError('render: card.title must be a non-empty string');
   }
+  const { locale = 'en-US' } = options ?? {};
   const title = card.title.trim();
   const underline = '='.repeat(title.length);
   const lines = [title, underline];
+  if (card.date !== undefined && card.date !== null) {
+    const date = parseCardDate(card.date);
+    lines.push(new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: 'UTC' }).format(date));
+  }
   const tags = Array.isArray(card.tags) ? card.tags.filter(Boolean) : [];
   if (tags.length > 0) {
     lines.push(tags.map((tag) => `#${String(tag).trim()}`).join(' '));
