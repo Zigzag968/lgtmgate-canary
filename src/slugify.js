@@ -1,5 +1,17 @@
 'use strict';
 
+const TRANSLIT = {
+  'ß': 'ss',
+  'ø': 'o',
+  'Ø': 'o',
+  'œ': 'oe',
+  'Œ': 'oe',
+  'ł': 'l',
+  'Ł': 'l',
+  'æ': 'ae',
+  'Æ': 'ae',
+};
+
 /**
  * Turn a free-text title into a URL-safe slug.
  *
@@ -10,13 +22,15 @@
  * marks are stripped), and any run of non-alphanumerics (including whitespace)
  * collapses to one hyphen:
  *   slugify("Héllo  Wörld!") -> "hello-world"
- * Letters with no NFD decomposition (ß, ø, æ, ł) are dropped.
+ * Letters with no NFD decomposition (ß, ø, œ, ł, æ, either case) are
+ * transliterated to ss, o, oe, l, ae before the NFD step.
  */
 function slugify(input) {
   if (typeof input !== 'string') {
     throw new TypeError('slugify: input must be a string');
   }
   return input
+    .replace(/[ßøØœŒłŁæÆ]/g, (c) => TRANSLIT[c])
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase()
