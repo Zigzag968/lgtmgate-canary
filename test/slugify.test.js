@@ -40,3 +40,26 @@ test('trims edge whitespace and handles empty string', () => {
 test('rejects non-string input', () => {
   assert.throws(() => slugify(42), TypeError);
 });
+
+test('transliterates ß to ss', () => {
+  assert.equal(slugify('Straße'), 'strasse');
+});
+
+test('transliterates uppercase Ø Œ Ł Æ', () => {
+  assert.equal(slugify('Øresund'), 'oresund');
+  assert.equal(slugify('Œuvre'), 'oeuvre');
+  assert.equal(slugify('Łódź'), 'lodz');
+  assert.equal(slugify('Æsir'), 'aesir');
+});
+
+test('transliterates lowercase ø œ ł æ', () => {
+  assert.equal(slugify('øl'), 'ol');
+  assert.equal(slugify('cœur'), 'coeur');
+  assert.equal(slugify('łuk'), 'luk');
+  assert.equal(slugify('encyclopædia'), 'encyclopaedia');
+});
+
+test('transliterates a mixed title', () => {
+  assert.equal(slugify('Straße Øresund Łódź'), 'strasse-oresund-lodz');
+});
+
