@@ -12,6 +12,7 @@
  * length otherwise:
  *   truncate("Release notes", 8) -> "Release…"
  *   truncate("Release notes", 9) -> "Release…"
+ *   truncate("Hi", 5) -> "Hi"
  *
  * @param {string} text
  * @param {number} max positive integer
