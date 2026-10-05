@@ -16,6 +16,15 @@ function parseCardDate(value) {
 }
 
 /**
+ * Normalize a card's tags: a non-array yields `[]`; falsy entries are dropped,
+ * the rest are stringified and trimmed, and entries left empty are dropped.
+ * (`0` and `false` are dropped before stringifying; `5` becomes `'5'`.)
+ */
+function normalizeTags(tags) {
+  return Array.isArray(tags) ? tags.filter(Boolean).map((tag) => String(tag).trim()).filter(Boolean) : [];
+}
+
+/**
  * Render a tiny "card" as plain text: a title line, an underline, an optional
  * locale-formatted date line and an optional list of tags. Pure function, no
  * I/O. The underline has one `=` per code point of the trimmed title.
@@ -44,13 +53,11 @@ function render(card, options) {
     const date = parseCardDate(card.date);
     lines.push(new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: 'UTC' }).format(date));
   }
-  const tags = Array.isArray(card.tags)
-    ? card.tags.filter(Boolean).map((tag) => String(tag).trim()).filter(Boolean)
-    : [];
+  const tags = normalizeTags(card.tags);
   if (tags.length > 0) {
     lines.push(tags.map((tag) => `#${tag}`).join(' '));
   }
   return lines.join('\n');
 }
 
-module.exports = { render };
+module.exports = { render, normalizeTags };

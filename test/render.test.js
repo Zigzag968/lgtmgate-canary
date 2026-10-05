@@ -3,6 +3,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { render } = require('../src/render');
+const { normalizeTags } = require('../src/render');
 
 test('renders a title with an underline of the same length', () => {
   assert.equal(render({ title: 'Hello' }), 'Hello\n=====');
@@ -131,4 +132,34 @@ test('underlines a mixed title with one = per code point', () => {
 
 test('keeps a BMP-only title underline equal to one = per code point', () => {
   assert.equal(render({ title: 'Héllo' }), 'Héllo\n=====');
+});
+
+test('normalizeTags returns [] for undefined', () => {
+  assert.deepEqual(normalizeTags(undefined), []);
+});
+
+test('normalizeTags returns [] for non-array input', () => {
+  assert.deepEqual(normalizeTags('a'), []);
+  assert.deepEqual(normalizeTags({ 0: 'a' }), []);
+  assert.deepEqual(normalizeTags(3), []);
+});
+
+test('normalizeTags drops falsy entries', () => {
+  assert.deepEqual(normalizeTags(['', null, undefined, 0, false, 'a']), ['a']);
+});
+
+test('normalizeTags drops whitespace-only entries', () => {
+  assert.deepEqual(normalizeTags(['  ', '\t', 'a']), ['a']);
+});
+
+test('normalizeTags stringifies numbers and drops 0', () => {
+  assert.deepEqual(normalizeTags([3, 0, 5]), ['3', '5']);
+});
+
+test('normalizeTags trims surrounding spaces', () => {
+  assert.deepEqual(normalizeTags([' a ', 'b ']), ['a', 'b']);
+});
+
+test('normalizeTags handles a mixed list', () => {
+  assert.deepEqual(normalizeTags([' a ', '', null, 3]), ['a', '3']);
 });
