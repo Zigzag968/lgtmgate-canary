@@ -10,6 +10,13 @@ const TRANSLIT = {
   'Ł': 'l',
   'æ': 'ae',
   'Æ': 'ae',
+  'ı': 'i',
+  'đ': 'd',
+  'Đ': 'd',
+  'ð': 'd',
+  'Ð': 'd',
+  'þ': 'th',
+  'Þ': 'th',
 };
 
 /**
@@ -22,15 +29,15 @@ const TRANSLIT = {
  * marks are stripped), and any run of non-alphanumerics (including whitespace)
  * collapses to one hyphen:
  *   slugify("Héllo  Wörld!") -> "hello-world"
- * Letters with no NFD decomposition (ß, ø, œ, ł, æ, either case) are
- * transliterated to ss, o, oe, l, ae before the NFD step.
+ * Letters with no NFD decomposition (ß, ø, œ, ł, æ, ı, đ, ð, þ, either case) are
+ * transliterated to ss, o, oe, l, ae, i, d, d, th before the NFD step.
  */
 function slugify(input) {
   if (typeof input !== 'string') {
     throw new TypeError('slugify: input must be a string');
   }
   return input
-    .replace(/[ßøØœŒłŁæÆ]/g, (c) => TRANSLIT[c])
+    .replace(/[ßøØœŒłŁæÆıđĐðÐþÞ]/g, (c) => TRANSLIT[c])
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase()

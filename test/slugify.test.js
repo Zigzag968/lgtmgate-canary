@@ -63,3 +63,17 @@ test('transliterates a mixed title', () => {
   assert.equal(slugify('Straße Øresund Łódź'), 'strasse-oresund-lodz');
 });
 
+
+test('transliterates ı đ Đ ð Ð þ Þ', () => {
+  assert.equal(slugify('Kısa'), 'kisa');
+  assert.equal(slugify('Đồng'), 'dong');
+  assert.equal(slugify('đa'), 'da');
+  assert.equal(slugify('Ðorđe'), 'dorde');
+  assert.equal(slugify('ðe'), 'de');
+  assert.equal(slugify('Þor'), 'thor');
+  assert.equal(slugify('þor'), 'thor');
+});
+
+test('transliterates a mixed title with ı đ ð þ', () => {
+  assert.equal(slugify('Kısa Đồng Ðorđe Þor'), 'kisa-dong-dorde-thor');
+});
