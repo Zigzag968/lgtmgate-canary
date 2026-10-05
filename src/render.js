@@ -18,7 +18,7 @@ function parseCardDate(value) {
 /**
  * Render a tiny "card" as plain text: a title line, an underline, an optional
  * locale-formatted date line and an optional list of tags. Pure function, no
- * I/O.
+ * I/O. The underline has one `=` per code point of the trimmed title.
  *
  *   render({ title: 'Hello', tags: ['a', 'b'] })
  *   // "Hello\n=====\n#a #b"
@@ -38,7 +38,7 @@ function render(card, options) {
   }
   const { locale = 'en-US' } = options ?? {};
   const title = card.title.trim();
-  const underline = '='.repeat(title.length);
+  const underline = '='.repeat([...title].length);
   const lines = [title, underline];
   if (card.date !== undefined && card.date !== null) {
     const date = parseCardDate(card.date);
