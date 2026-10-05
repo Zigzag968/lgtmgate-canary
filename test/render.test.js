@@ -120,3 +120,15 @@ test('rejects a whitespace-only title even when a date is set', () => {
     message: 'render: card.title must be a non-empty string',
   });
 });
+
+test('underlines an emoji title with one = per code point', () => {
+  assert.equal(render({ title: 'Hi 😀' }), 'Hi 😀\n====');
+});
+
+test('underlines a mixed title with one = per code point', () => {
+  assert.equal(render({ title: 'a😀b😀' }), 'a😀b😀\n====');
+});
+
+test('keeps a BMP-only title underline equal to one = per code point', () => {
+  assert.equal(render({ title: 'Héllo' }), 'Héllo\n=====');
+});
