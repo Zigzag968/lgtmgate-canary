@@ -17,3 +17,9 @@ const { render } = require('./src/render');
 render({ title: 'Hello', tags: ['a', 'b'] });
 // -> "Hello\n=====\n#a #b"
 ```
+
+```js
+const { wordCount } = require('./src/wordCount');
+wordCount(' a  b\tc\nd ');
+// -> 4
+```

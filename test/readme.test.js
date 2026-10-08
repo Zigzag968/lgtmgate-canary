@@ -12,8 +12,8 @@ const blocks = [...usage.matchAll(/```js\n([\s\S]*?)```/g)].map((m) => m[1]);
 
 const localRequire = (p) => require(path.resolve(root, p));
 
-test('README Usage section has exactly two js blocks', () => {
-  assert.equal(blocks.length, 2);
+test('README Usage section has exactly three js blocks', () => {
+  assert.equal(blocks.length, 3);
 });
 
 blocks.forEach((block, i) => {
