@@ -6,7 +6,7 @@
   "type": "commonjs",
   "main": "src/slugify.js",
   "scripts": {
-    "build": "node --check src/slugify.js && node --check src/render.js && node --check src/truncate.js && node --check src/initials.js && node --check src/wordCount.js",
+    "build": "node --check src/slugify.js && node --check src/render.js && node --check src/truncate.js && node --check src/initials.js && node --check src/wordCount.js && node --check src/capitalizeWords.js",
     "test": "node --test",
     "format": "echo \"no formatter configured (stdlib-only project)\""
   },

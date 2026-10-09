@@ -23,3 +23,9 @@ const { wordCount } = require('./src/wordCount');
 wordCount(' a  b\tc\nd ');
 // -> 4
 ```
+
+```js
+const { capitalizeWords } = require('./src/capitalizeWords');
+capitalizeWords(' ada  lovelace ');
+// -> " Ada  Lovelace "
+```
