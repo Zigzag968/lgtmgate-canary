@@ -23,3 +23,9 @@ const { wordCount } = require('./src/wordCount');
 wordCount(' a  b\tc\nd ');
 // -> 4
 ```
+
+```js
+const { isPalindrome } = require('./src/isPalindrome');
+isPalindrome('A man, a plan, a canal: Panama');
+// -> true
+```
