@@ -25,6 +25,6 @@
   "stack": "Node 22 / CommonJS, stdlib only (node:test)",
   "projectSpecifics": ".claude/lgtmgate",
   "minPluginVersion": "1.3.0-beta.50",
-  "agentContext": { "*": [] },
+  "agentContext": { "*": ["docs/canary-context.md"] },
   "specifics": { "acceptOversize": {} }
 }
