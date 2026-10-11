@@ -4,3 +4,4 @@ build/test tools
 [ask] tools/CLI allowed: which tools and command line programs the developer may use
 [ask] rules to target: which rule files the developer must follow
 -->
+- Tools: node, npm, git and gh only; gh through REST (`gh api`).

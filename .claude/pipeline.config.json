@@ -1,7 +1,7 @@
 {
   "baseBranch": "main",
   "branchPrefix": "feat/",
-  "worktreeRoot": "../worktrees/lgtmgate-canary",
+  "worktreeRoot": "/Volumes/SSD/Dev/Worktrees/lgtmgate-canary",
   "commands": {
     "build": "npm run build",
     "test": "npm test",
@@ -24,7 +24,7 @@
   "planFreshness": "advisory",
   "stack": "Node 22 / CommonJS, stdlib only (node:test)",
   "projectSpecifics": ".claude/lgtmgate",
-  "minPluginVersion": "1.3.0-beta.45",
-  "agentContext": { "*": ["docs/canary-context.md"] },
+  "minPluginVersion": "1.3.0-beta.50",
+  "agentContext": { "*": [] },
   "specifics": { "acceptOversize": {} }
 }
