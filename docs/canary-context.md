@@ -1,0 +1,1 @@
+This repository is a canary consumer of a Claude Code pipeline plugin. It holds small, dependency-free string helpers (slugify, truncate, initials, wordCount, render). Each helper lives in its own file under src/ and is covered by node:test tests under test/.
