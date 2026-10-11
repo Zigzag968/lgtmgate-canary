@@ -1,31 +1,30 @@
 {
-  "ghProject": {},
   "baseBranch": "main",
   "branchPrefix": "feat/",
   "worktreeRoot": "../worktrees/lgtmgate-canary",
-  "repo": "Zigzag968/lgtmgate-canary",
-  "conventionsRule": ".claude/rules/pr-acceptance.md",
   "commands": {
     "build": "npm run build",
     "test": "npm test",
     "format": "npm run format"
   },
-  "ciChecks": [
-    "test"
-  ],
+  "ciChecks": ["test"],
   "regressionGuard": {
     "testGlob": "test/*.test.js",
     "testFnPattern": "test(",
-    "baselineCmd": "node --test"
+    "baselineCmd": ""
   },
   "provision": {
     "extraLinks": []
   },
   "preflight": {
     "canonicalStringBan": [],
-    "envSymlink": "forbidden"
+    "envSymlink": "required"
   },
   "planAudit": false,
   "planFreshness": "advisory",
-  "stack": "Node 22 / stdlib only (node:test)"
+  "stack": "Node 22 / CommonJS, stdlib only (node:test)",
+  "projectSpecifics": ".claude/lgtmgate",
+  "minPluginVersion": "1.3.0-beta.45",
+  "agentContext": { "*": [] },
+  "specifics": { "acceptOversize": {} }
 }
