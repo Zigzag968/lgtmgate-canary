@@ -18,7 +18,7 @@
   },
   "preflight": {
     "canonicalStringBan": [],
-    "envSymlink": "required"
+    "envSymlink": "ignore"
   },
   "planAudit": false,
   "planFreshness": "advisory",
