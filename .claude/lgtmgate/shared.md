@@ -4,6 +4,3 @@
 [ask] forbidden actions: what no role may ever do in this repo
 Keep it short: rules written here, no copy of a plugin file.
 -->
-- Language: issues, PRs, commits and docs are written in English.
-- Test policy: every change under `src/` comes with a test under `test/` (node:test); `npm test` must pass.
-- Forbidden: adding npm dependencies (stdlib only), pushing to `main` (branch + PR only), editing `.github/workflows`.

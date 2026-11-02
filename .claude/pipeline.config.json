@@ -7,7 +7,9 @@
     "test": "npm test",
     "format": "npm run format"
   },
-  "ciChecks": ["test"],
+  "ciChecks": [
+    "test"
+  ],
   "regressionGuard": {
     "testGlob": "test/*.test.js",
     "testFnPattern": "test(",
@@ -23,8 +25,14 @@
   "planAudit": false,
   "planFreshness": "advisory",
   "stack": "Node 22 / CommonJS, stdlib only (node:test)",
+  "agentContext": {
+    "*": [
+      "docs/canary-context.md"
+    ]
+  },
+  "specifics": {
+    "acceptOversize": {}
+  },
   "projectSpecifics": ".claude/lgtmgate",
-  "minPluginVersion": "1.3.0-beta.50",
-  "agentContext": { "*": ["docs/canary-context.md"] },
-  "specifics": { "acceptOversize": {} }
+  "minPluginVersion": "1.5.5"
 }
