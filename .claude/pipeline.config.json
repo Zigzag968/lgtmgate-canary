@@ -34,5 +34,5 @@
     "acceptOversize": {}
   },
   "projectSpecifics": ".claude/lgtmgate",
-  "minPluginVersion": "1.5.5"
+  "minPluginVersion": "1.6.0-beta.9"
 }
