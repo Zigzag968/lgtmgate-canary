@@ -4,3 +4,6 @@
 [ask] forbidden actions: what no role may ever do in this repo
 Keep it short: rules written here, no copy of a plugin file.
 -->
+
+- Docs and issues language: English.
+- Test policy: every tested behaviour.
