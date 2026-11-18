@@ -24,6 +24,10 @@ test('counts two words', () => {
   assert.equal(wordCount('Ada Lovelace'), 2);
 });
 
+test('does not split words on a comma', () => {
+  assert.equal(wordCount('one,two three'), 2);
+});
+
 test('rejects non-string input with TypeError', () => {
   assert.throws(() => wordCount(42), TypeError);
   assert.throws(() => wordCount(null), TypeError);
