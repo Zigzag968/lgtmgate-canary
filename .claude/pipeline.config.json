@@ -1,4 +1,5 @@
 {
+  "ghProject": {},
   "baseBranch": "main",
   "branchPrefix": "feat/",
   "worktreeRoot": "/Volumes/SSD/Dev/Worktrees/lgtmgate-canary",
@@ -24,15 +25,13 @@
   },
   "planAudit": false,
   "planFreshness": "advisory",
-  "stack": "Node 22 / CommonJS, stdlib only (node:test)",
+  "stack": "Node 22 (stdlib only, node:test, CommonJS)",
+  "projectSpecifics": ".claude/lgtmgate",
   "agentContext": {
-    "*": [
-      "docs/canary-context.md"
-    ]
+    "*": []
   },
   "specifics": {
     "acceptOversize": {}
   },
-  "projectSpecifics": ".claude/lgtmgate",
-  "minPluginVersion": "1.5.5"
+  "minPluginVersion": "1.6.0-beta.19"
 }
