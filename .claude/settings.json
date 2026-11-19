@@ -1,5 +1,7 @@
 {
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "lgtmgate@zigzag-plugins-beta": true
+  },
   "extraKnownMarketplaces": {
     "zigzag-plugins-beta": {
       "source": {
