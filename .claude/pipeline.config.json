@@ -1,0 +1,37 @@
+{
+  "ghProject": {},
+  "baseBranch": "main",
+  "branchPrefix": "feat/",
+  "worktreeRoot": "/Volumes/SSD/Dev/Worktrees/lgtmgate-canary",
+  "commands": {
+    "build": "npm run build",
+    "test": "npm test",
+    "format": "npm run format"
+  },
+  "ciChecks": [
+    "test"
+  ],
+  "regressionGuard": {
+    "testGlob": "test/*.test.js",
+    "testFnPattern": "test(",
+    "baselineCmd": ""
+  },
+  "provision": {
+    "extraLinks": []
+  },
+  "preflight": {
+    "canonicalStringBan": [],
+    "envSymlink": "ignore"
+  },
+  "planAudit": false,
+  "planFreshness": "advisory",
+  "stack": "Node 22 (stdlib only, node:test, CommonJS)",
+  "agentContext": {
+    "*": []
+  },
+  "specifics": {
+    "acceptOversize": {}
+  },
+  "projectSpecifics": ".claude/lgtmgate",
+  "minPluginVersion": "1.6.0-beta.35"
+}
