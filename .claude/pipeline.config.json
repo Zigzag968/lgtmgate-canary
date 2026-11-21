@@ -27,7 +27,9 @@
   "planFreshness": "advisory",
   "stack": "Node 22 (stdlib only, node:test, CommonJS)",
   "agentContext": {
-    "*": []
+    "*": [
+      "docs/canary-style.md"
+    ]
   },
   "specifics": {
     "acceptOversize": {}
